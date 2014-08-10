@@ -88,6 +88,7 @@ public class CommandRegister {
 							+" has Annotion, but dont have parameter CommandEvent.");
 			}
 		}
-		MajnCorePlugin.instance.getLogger().log(Level.FINEST,"Commands ("+met.substring(2)+") from class "+register.getName()+" registred successfully");
+		if(met.length()>2)
+			MajnCorePlugin.instance.getLogger().log(Level.FINEST,"Commands ("+met.substring(2)+") from class "+register.getName()+" registred successfully");
 	}
 }

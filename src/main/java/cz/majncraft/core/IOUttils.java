@@ -60,7 +60,6 @@ public class IOUttils {
 			file.createNewFile();
 			YamlConfiguration fileCfg=new YamlConfiguration();
 			fileCfg.load(file);
-			fileCfg.createSection("core");
 			fileCfg.set("core.normal.witherSpawnAboveBlock", -1);
 			fileCfg.set("core.normal.witherSpawnBelowBlock", 256);
 			fileCfg.set("core.nether.witherSpawnAboveBlock", -1);
@@ -70,7 +69,6 @@ public class IOUttils {
 			fileCfg.set("core.protection.witherEatBlock", true);
 			fileCfg.set("core.protection.witherProjectile", true);
 			fileCfg.set("core.protection.explosionWither", true);
-			fileCfg.createSection("protection");
 			fileCfg.set("protection.denyDrop.activated", true);
 			fileCfg.set("protection.denyDrop.allWood", true);
 			fileCfg.set("protection.denyDrop.others", new ArrayList<String>());
