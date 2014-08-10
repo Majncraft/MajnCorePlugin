@@ -32,7 +32,7 @@ public class IOUttils {
 		File file=new File(MajnCorePlugin.instance.getDataFolder()+"/config.yml");
 		if(!file.exists())
 		{
-			file.mkdirs();
+			MajnCorePlugin.instance.getDataFolder().mkdirs();
 			file.createNewFile();
 		}
 		YamlConfiguration fileCfg=new YamlConfiguration();
