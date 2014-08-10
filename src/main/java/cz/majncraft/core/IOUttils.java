@@ -30,7 +30,7 @@ public class IOUttils {
 	private static void firstrunMain() throws IOException, InvalidConfigurationException
 	{
 		File file=new File(MajnCorePlugin.instance.getDataFolder()+"/config.yml");
-		if(file.exists())
+		if(!file.exists())
 		{
 			file.mkdirs();
 			file.createNewFile();
@@ -47,7 +47,7 @@ public class IOUttils {
 	private static void firstrunWitherProtection() throws IOException, InvalidConfigurationException
 	{
 		File file=new File(MajnCorePlugin.instance.getDataFolder()+"/witherProtection.yml");
-		if(file.exists())
+		if(!file.exists())
 		{
 			MajnCorePlugin.instance.getDataFolder().mkdirs();
 			file.createNewFile();
