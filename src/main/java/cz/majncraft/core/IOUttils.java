@@ -21,7 +21,7 @@ public class IOUttils {
 		YamlConfiguration cfg=new YamlConfiguration();
 			try
 			{	
-			firstrunWitherProtection();
+				firstrunMain();
 			cfg.load(file);
 			}
 			catch(Exception ex){ ex.printStackTrace();}
