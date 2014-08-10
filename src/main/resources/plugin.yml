@@ -1,0 +1,43 @@
+name: ${project.name}
+version: ${project.version}
+author: welfare93
+website: https://github.com/Majncraft/WitherCustomShield
+main: cz.majncraft.MajnCorePlugin
+commands:
+  chnkunload:
+    description: Unload chunk.
+    usage:  /chnkunload [x] [y] [z] {dim}
+  chnkload:
+    description: Load chunk.
+    usage: /chnkload [x] [y] [z] {dim}
+  chnkforceunload:
+    description: Force unload chunk without save.
+    usage: /chnkforceunload [x] [y] [z] {dim}
+  chnktest:
+    description: Chunk info.
+    usage: /chnktest [x] [y] [z] {dim}
+  showmap:
+    description: Print link to player on dynmap. 
+    usage: /showmap
+  ruler:
+    description: First use store location, second calculate distance.  
+    usage:  /ruler
+permissions:
+  'majncraft.user.ruler':
+    description: Gives player access to the /ruler.
+    default: true
+  'majncraft.user.showmap':
+    description: Gives player access to the /showmap.
+    default: true
+  'majncraft.mod.chunktest':
+    description: Gives player access to the /chnktest.
+    default: op
+  'majncraft.mod.chunkload':
+    description: Gives player access to the /chnkload.
+    default: op
+  'majncraft.mod.chunkunload':
+    description: Gives player access to the /chnkunload.
+    default: op
+  'majncraft.op.chunkforceunload':
+    description: Gives player access to the /chnkforceunload.
+    default: op
