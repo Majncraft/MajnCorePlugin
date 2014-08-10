@@ -48,7 +48,6 @@ public class IOUttils {
 		fileCfg.addDefault("protection.bug.arrowTNTDuplicator", true);
 		fileCfg.addDefault("protection.bug.treeGrowingThroughBedrock", true);
 		fileCfg.addDefault("core.showmaplink", "http://map.majncraft.cz/");
-		fileCfg.save(file);
 		
 	}
 	private static void firstrunWitherProtection() throws IOException, InvalidConfigurationException
@@ -60,6 +59,12 @@ public class IOUttils {
 			file.createNewFile();
 			YamlConfiguration fileCfg=new YamlConfiguration();
 			fileCfg.load(file);
+			fileCfg.set("protection.denyDrop.activated", true);
+			fileCfg.set("protection.denyDrop.allWood", true);
+			fileCfg.set("protection.denyDrop.others", new ArrayList<String>());
+			fileCfg.set("protection.denyDestroy.activated", false);
+			fileCfg.set("protection.denyDestroy.allWood", false);
+			fileCfg.set("protection.denyDestroy.others", new ArrayList<String>());
 			fileCfg.set("core.normal.witherSpawnAboveBlock", -1);
 			fileCfg.set("core.normal.witherSpawnBelowBlock", 256);
 			fileCfg.set("core.nether.witherSpawnAboveBlock", -1);
@@ -69,17 +74,10 @@ public class IOUttils {
 			fileCfg.set("core.protection.witherEatBlock", true);
 			fileCfg.set("core.protection.witherProjectile", true);
 			fileCfg.set("core.protection.explosionWither", true);
-			fileCfg.set("protection.denyDrop.activated", true);
-			fileCfg.set("protection.denyDrop.allWood", true);
-			fileCfg.set("protection.denyDrop.others", new ArrayList<String>());
-			fileCfg.set("protection.denyDestroy.activated", false);
-			fileCfg.set("protection.denyDestroy.allWood", false);
-			fileCfg.set("protection.denyDestroy.others", new ArrayList<String>());
 			fileCfg.save(file);
 		}
 		YamlConfiguration fileCfg=new YamlConfiguration();
 		fileCfg.load(file);
-		fileCfg.createSection("core");
 		fileCfg.addDefault("core.normal.witherSpawnAboveBlock", -1);
 		fileCfg.addDefault("core.normal.witherSpawnBelowBlock", 256);
 		fileCfg.addDefault("core.nether.witherSpawnAboveBlock", -1);
@@ -89,14 +87,12 @@ public class IOUttils {
 		fileCfg.addDefault("core.protection.witherEatBlock", true);
 		fileCfg.addDefault("core.protection.witherProjectile", true);
 		fileCfg.addDefault("core.protection.explosionWither", true);
-		fileCfg.createSection("protection");
 		fileCfg.addDefault("protection.denyDrop.activated", true);
 		fileCfg.addDefault("protection.denyDrop.allWood", true);
 		fileCfg.addDefault("protection.denyDrop.others", new ArrayList<String>());
 		fileCfg.addDefault("protection.denyDestroy.activated", false);
 		fileCfg.addDefault("protection.denyDestroy.allWood", false);
 		fileCfg.addDefault("protection.denyDestroy.others", new ArrayList<String>());
-		fileCfg.save(file);
 	}
 	@SuppressWarnings("unchecked")
 	public static WitherExplosion loadWitherProtection(WitherExplosion data)

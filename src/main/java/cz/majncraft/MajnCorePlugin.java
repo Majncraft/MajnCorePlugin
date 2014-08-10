@@ -37,7 +37,11 @@ public class MajnCorePlugin extends JavaPlugin{
 	}
 	@Override
 	public void onEnable() {
-		
+		witherex=new WitherExplosion();
+		IOUttils.loadWitherProtection(witherex);
+		mcbugabuse=new MinecraftBugAbusing();
+		this.getServer().getPluginManager().registerEvents(witherex, this);
+		this.getServer().getPluginManager().registerEvents(mcbugabuse, this);
 		super.onEnable();
 	}
 	@Override
@@ -50,11 +54,7 @@ public class MajnCorePlugin extends JavaPlugin{
 		CommandRegister.getInstance().Register(ChunkCommands.class);
 		CommandRegister.getInstance().Register(TextCommands.class);
 		CommandRegister.getInstance().Register(WorldCommands.class);
-		witherex=new WitherExplosion();
-		IOUttils.loadWitherProtection(witherex);
-		mcbugabuse=new MinecraftBugAbusing();
-		this.getServer().getPluginManager().registerEvents(witherex, this);
-		this.getServer().getPluginManager().registerEvents(mcbugabuse, this);
+		
 		super.onLoad();
 	}
 	private WitherExplosion witherex;
