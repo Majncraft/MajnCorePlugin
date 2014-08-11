@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.commands.Cmd.Side;
 
 public class ChunkCommands{
@@ -89,7 +90,7 @@ public class ChunkCommands{
 		Location loc=base(event.sender, event.args);
 		if(loc==null) return;
 		event.sender.sendMessage("Chunk ("+loc.getChunk().getX()+";"+loc.getChunk().getZ()+")");
-		event.sender.sendMessage("Is loaded: "+loc.getChunk().isLoaded());
+		event.sender.sendMessage("Is loaded: "+loc.getWorld().isChunkLoaded(loc.getChunk()));
 		event.sender.sendMessage("Number of entities: "+loc.getChunk().getEntities().length);
 		event.sender.sendMessage("Number of tileentities: "+loc.getChunk().getTileEntities().length);
 	}

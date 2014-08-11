@@ -34,20 +34,15 @@ public class IOUttils {
 		{
 			MajnCorePlugin.instance.getDataFolder().mkdirs();
 			file.createNewFile();
-			YamlConfiguration fileCfg=new YamlConfiguration();
-			fileCfg.load(file);
-			fileCfg.set("core.version", 1);
-			fileCfg.set("protection.bug.arrowTNTDuplicator", true);
-			fileCfg.set("protection.bug.treeGrowingThroughBedrock", true);
-			fileCfg.set("core.showmaplink", "http://map.majncraft.cz/");
-			fileCfg.save(file);
 		}
-		YamlConfiguration fileCfg=new YamlConfiguration();
+		YamlConfigurationExtended fileCfg=new YamlConfigurationExtended();
 		fileCfg.load(file);
-		fileCfg.addDefault("core.version", 1);
-		fileCfg.addDefault("protection.bug.arrowTNTDuplicator", true);
-		fileCfg.addDefault("protection.bug.treeGrowingThroughBedrock", true);
-		fileCfg.addDefault("core.showmaplink", "http://map.majncraft.cz/");
+		fileCfg.set("core.version", 2);
+		fileCfg.s("protection.bug.arrowTNTDuplicator", true);
+		fileCfg.s("protection.bug.treeGrowingThroughBedrock", true);
+		fileCfg.s("core.showmaplink", "http://map.majncraft.cz/");
+		fileCfg.s("alteration.spawn.pigmanUnder", 110);
+		fileCfg.save(file);
 		
 	}
 	private static void firstrunWitherProtection() throws IOException, InvalidConfigurationException
@@ -57,42 +52,25 @@ public class IOUttils {
 		{
 			MajnCorePlugin.instance.getDataFolder().mkdirs();
 			file.createNewFile();
-			YamlConfiguration fileCfg=new YamlConfiguration();
-			fileCfg.load(file);
-			fileCfg.set("protection.denyDrop.activated", true);
-			fileCfg.set("protection.denyDrop.allWood", true);
-			fileCfg.set("protection.denyDrop.others", new ArrayList<String>());
-			fileCfg.set("protection.denyDestroy.activated", false);
-			fileCfg.set("protection.denyDestroy.allWood", false);
-			fileCfg.set("protection.denyDestroy.others", new ArrayList<String>());
-			fileCfg.set("core.normal.witherSpawnAboveBlock", -1);
-			fileCfg.set("core.normal.witherSpawnBelowBlock", 256);
-			fileCfg.set("core.nether.witherSpawnAboveBlock", -1);
-			fileCfg.set("core.nether.witherSpawnBelowBlock", 256);
-			fileCfg.set("core.end.witherSpawnAboveBlock", -1);
-			fileCfg.set("core.end.witherSpawnBelowBlock", 256);
-			fileCfg.set("core.protection.witherEatBlock", true);
-			fileCfg.set("core.protection.witherProjectile", true);
-			fileCfg.set("core.protection.explosionWither", true);
-			fileCfg.save(file);
 		}
-		YamlConfiguration fileCfg=new YamlConfiguration();
-		fileCfg.load(file);
-		fileCfg.addDefault("core.normal.witherSpawnAboveBlock", -1);
-		fileCfg.addDefault("core.normal.witherSpawnBelowBlock", 256);
-		fileCfg.addDefault("core.nether.witherSpawnAboveBlock", -1);
-		fileCfg.addDefault("core.nether.witherSpawnBelowBlock", 256);
-		fileCfg.addDefault("core.end.witherSpawnAboveBlock", -1);
-		fileCfg.addDefault("core.end.witherSpawnBelowBlock", 256);
-		fileCfg.addDefault("core.protection.witherEatBlock", true);
-		fileCfg.addDefault("core.protection.witherProjectile", true);
-		fileCfg.addDefault("core.protection.explosionWither", true);
-		fileCfg.addDefault("protection.denyDrop.activated", true);
-		fileCfg.addDefault("protection.denyDrop.allWood", true);
-		fileCfg.addDefault("protection.denyDrop.others", new ArrayList<String>());
-		fileCfg.addDefault("protection.denyDestroy.activated", false);
-		fileCfg.addDefault("protection.denyDestroy.allWood", false);
-		fileCfg.addDefault("protection.denyDestroy.others", new ArrayList<String>());
+		YamlConfigurationExtended fileCfg=new YamlConfigurationExtended();
+			fileCfg.load(file);
+			fileCfg.s("protection.denyDrop.activated", true);
+			fileCfg.s("protection.denyDrop.allWood", true);
+			fileCfg.s("protection.denyDrop.others", new ArrayList<String>());
+			fileCfg.s("protection.denyDestroy.activated", false);
+			fileCfg.s("protection.denyDestroy.allWood", false);
+			fileCfg.s("protection.denyDestroy.others", new ArrayList<String>());
+			fileCfg.s("core.normal.witherSpawnAboveBlock", -1);
+			fileCfg.s("core.normal.witherSpawnBelowBlock", 256);
+			fileCfg.s("core.nether.witherSpawnAboveBlock", -1);
+			fileCfg.s("core.nether.witherSpawnBelowBlock", 256);
+			fileCfg.s("core.end.witherSpawnAboveBlock", -1);
+			fileCfg.s("core.end.witherSpawnBelowBlock", 256);
+			fileCfg.s("core.protection.witherEatBlock", true);
+			fileCfg.s("core.protection.witherProjectile", true);
+			fileCfg.s("core.protection.explosionWither", true);
+			fileCfg.save(file);
 	}
 	@SuppressWarnings("unchecked")
 	public static WitherExplosion loadWitherProtection(WitherExplosion data)
