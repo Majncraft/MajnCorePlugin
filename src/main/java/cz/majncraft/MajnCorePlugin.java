@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import cz.majncraft.alteration.Spawn;
 import cz.majncraft.api.CommandRegister;
 import cz.majncraft.commands.ChunkCommands;
 import cz.majncraft.commands.CommandEvent;
@@ -40,8 +41,10 @@ public class MajnCorePlugin extends JavaPlugin{
 		witherex=new WitherExplosion();
 		IOUttils.loadWitherProtection(witherex);
 		mcbugabuse=new MinecraftBugAbusing();
+		spawn=new Spawn();
 		this.getServer().getPluginManager().registerEvents(witherex, this);
 		this.getServer().getPluginManager().registerEvents(mcbugabuse, this);
+		this.getServer().getPluginManager().registerEvents(spawn, this);
 		super.onEnable();
 	}
 	@Override
@@ -59,6 +62,7 @@ public class MajnCorePlugin extends JavaPlugin{
 	}
 	private WitherExplosion witherex;
 	private MinecraftBugAbusing mcbugabuse;
+	private Spawn spawn;
 	@Override
 	public void reloadConfig() {
 		IOUttils.loadWitherProtection(witherex);
