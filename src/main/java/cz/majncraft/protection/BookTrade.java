@@ -45,7 +45,7 @@ public class BookTrade implements Listener {
         Player sender = (Player)e.getWhoClicked();
         //sender.sendMessage("You can't click this book while you're in Merchant's inventory!");
         sender.sendMessage(ChatColor.RED + "Tuto knizku nelze presouvat, kdyz jsi v nabidce obchodnika!");
-        Bukkit.getLogger().log(Level.INFO, "[MajnCore]" + sender.getName() + " tried to move restricted book while trade");
+        Bukkit.getLogger().log(Level.INFO, "[MajnCore] " + sender.getName() + " tried to move restricted book while trade");
         e.setCancelled(true);
         
 	}
