@@ -21,6 +21,7 @@ import cz.majncraft.commands.CommandEvent;
 import cz.majncraft.commands.TextCommands;
 import cz.majncraft.commands.WorldCommands;
 import cz.majncraft.core.IOUttils;
+import cz.majncraft.protection.BookTrade;
 import cz.majncraft.protection.MinecraftBugAbusing;
 import cz.majncraft.protection.WitherExplosion;
 
@@ -45,6 +46,7 @@ public class MajnCorePlugin extends JavaPlugin{
 		this.getServer().getPluginManager().registerEvents(witherex, this);
 		this.getServer().getPluginManager().registerEvents(mcbugabuse, this);
 		this.getServer().getPluginManager().registerEvents(spawn, this);
+		this.getServer().getPluginManager().registerEvents(new BookTrade(), this);
 		super.onEnable();
 	}
 	@Override

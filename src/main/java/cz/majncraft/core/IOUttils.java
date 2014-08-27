@@ -42,6 +42,14 @@ public class IOUttils {
 		fileCfg.s("protection.bug.treeGrowingThroughBedrock", true);
 		fileCfg.s("core.showmaplink", "http://map.majncraft.cz/");
 		fileCfg.s("alteration.spawn.pigmanUnder", 110);
+		
+		// Book Trade 
+		List<String> example = new ArrayList<String>();
+		example.add("Some");
+		example.add("Authors");
+		example.add("of");
+		example.add("books");
+		fileCfg.s("protection.bookTrade", example);
 		fileCfg.save(file);
 		
 	}
