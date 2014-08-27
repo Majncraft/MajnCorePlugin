@@ -1,13 +1,13 @@
 package cz.majncraft.protection;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -45,6 +45,7 @@ public class BookTrade implements Listener {
         Player sender = (Player)e.getWhoClicked();
         //sender.sendMessage("You can't click this book while you're in Merchant's inventory!");
         sender.sendMessage(ChatColor.RED + "Tuto knizku nelze presouvat, kdyz jsi v nabidce obchodnika!");
+        Bukkit.getLogger().log(Level.INFO, "[MajnCore]" + sender.getName() + " tried to move restricted book while trade");
         e.setCancelled(true);
         
 	}
