@@ -6,16 +6,16 @@ main: cz.majncraft.MajnCorePlugin
 commands:
   chnkunload:
     description: Unload chunk.
-    usage:  /chnkunload [x] [y] [z] {dim}
+    usage:  /chnkunload [x] [y] [z] {world}
   chnkload:
     description: Load chunk.
-    usage: /chnkload [x] [y] [z] {dim}
+    usage: /chnkload [x] [y] [z] {world}
   chnkforceunload:
     description: Force unload chunk without save.
-    usage: /chnkforceunload [x] [y] [z] {dim}
+    usage: /chnkforceunload [x] [y] [z] {world}
   chnktest:
     description: Chunk info.
-    usage: /chnktest [x] [y] [z] {dim}
+    usage: /chnktest [x] [y] [z] {world}
   showmap:
     description: Print link to player on dynmap. 
     usage: /showmap
