@@ -27,7 +27,7 @@ public class BookTrade implements Listener {
         }
         
         ItemStack i = e.getCurrentItem();
-        if(i.getType() != Material.WRITTEN_BOOK)
+        if(i == null || i.getType() != Material.WRITTEN_BOOK)
         	return;
         
         BookMeta book = (BookMeta)i.getItemMeta();
