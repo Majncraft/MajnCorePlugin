@@ -28,7 +28,7 @@ public abstract class LogFilter {
 	
 	protected boolean isValidLogger(String loggerName)
 	{
-		return (logger==null || logger.equals("")||logger.equals(loggerName));
+		return (logger==null || logger.equals("")||loggerName.contains(logger));
 	}
 	
 	public static class ExactFilter extends LogFilter
@@ -61,7 +61,7 @@ public abstract class LogFilter {
 
 		@Override
 		public LogRecord match(LogRecord record) {
-			if(expression.equals(record.getLoggerName()))
+			if(record.getLoggerName().contains(expression))
 			{
 				LoggingBuffer.log(logfile,record);
 				return null;

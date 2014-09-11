@@ -22,6 +22,7 @@ import org.bukkit.plugin.Plugin;
 import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.api.MajnPlugin;
 import cz.majncraft.core.YamlConfigurationExtended;
+import cz.majncraft.plugins.logCleaner.LogFilters;
 import cz.majncraft.plugins.logCleaner.LogHandler;
 
 public class LogCleaner extends MajnPlugin {
@@ -44,6 +45,7 @@ public class LogCleaner extends MajnPlugin {
 	private static final ScheduledExecutorService worker =Executors.newSingleThreadScheduledExecutor();
 	@Override
 	public void onEnable() {
+		LogFilters.reload();
 		Runnable task=new Runnable() {
 			
 			@Override
