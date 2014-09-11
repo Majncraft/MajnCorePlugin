@@ -56,11 +56,14 @@ public class LogCleaner extends MajnPlugin {
 		logger.info("Reflection of java.util.logging.Handler");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
-	    CtClass handler = pool.get("java.util.logging.Handler");
-	    CtMethod method = handler.getDeclaredMethod("publish");
-	    method.insertBefore("return;");
-	    method.insertBefore("if(record==null)");
-	    method.insertBefore("record=cz.majncraft.plugins.logCleaner.LogFilters.testLog(record);");
+	    CtClass handler = pool.get("java.util.logging.Logger");
+	    CtMethod method = handler.getDeclaredMethod("addHandler");
+	    method.insertBefore("handler=cz.majncraft.plugins.logCleaner.LogHandler.addHandler(handler,this.getName());");
+	    
+	    CtMethod method2 = handler.getDeclaredMethod("removeHandler");
+	    method2.insertBefore("return;");
+	    method2.insertBefore("if(handler==null)");
+	    method2.insertBefore("handler=cz.majncraft.plugins.logCleaner.LogHandler.removeHandler(handler,this.getName());");
 		logger.info("Inserting complate. Saving.");
 	    handler.toClass();
 		} catch (CannotCompileException e) {
