@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+import cz.majncraft.plugins.LogCleaner;
+
 public class LogFilters {
 
 	private static Set<LogFilter> filters=new HashSet<LogFilter>();

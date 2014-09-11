@@ -1,4 +1,4 @@
-package cz.majncraft.plugins.logCleaner;
+package cz.majncraft.plugins;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.api.MajnPlugin;
 import cz.majncraft.core.YamlConfigurationExtended;
+import cz.majncraft.plugins.logCleaner.LogHandler;
 
 public class LogCleaner extends MajnPlugin {
 

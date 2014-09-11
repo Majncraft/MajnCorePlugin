@@ -8,6 +8,8 @@ import java.io.Writer;
 import java.util.Date;
 import java.util.logging.LogRecord;
 
+import cz.majncraft.plugins.LogCleaner;
+
 
 public class LoggingBuffer {
 
