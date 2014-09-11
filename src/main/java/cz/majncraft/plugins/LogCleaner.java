@@ -77,10 +77,6 @@ public class LogCleaner extends MajnPlugin {
 					log.addHandler(handler);
 				}
 				logger.info("LogCleaner now handle controls over "+loggers.size()+" loggers:");
-				String out="";
-				for(Logger l:loggers)
-					out+=","+l.getName();
-				logger.info(out.substring(1)+".");
 					
 			}
 		};

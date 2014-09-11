@@ -15,7 +15,16 @@ public class LoggingBuffer {
 
 	public static void log(String file,LogRecord log)
 	{
-		File f=new File(LogCleaner.instance.getCustomLogFolder()+"file");
+		if(file=="")
+			return;
+		File f=new File(LogCleaner.instance.getCustomLogFolder()+file);
+		if(!f.exists())
+			try {
+				f.getParentFile().mkdirs();
+				f.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		Writer output;
 		try {
 			output = new BufferedWriter(new FileWriter(f));
