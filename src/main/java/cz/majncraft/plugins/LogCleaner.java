@@ -55,8 +55,10 @@ public class LogCleaner extends MajnPlugin {
 	public void onEnable() {
 		LogFilters.reload();
 		logger.info("Reflection of java.util.logging.Handler");
+		logger.info(Bukkit.getWorldContainer().getAbsolutePath()+"/../plugins/MajnCorePlugin.jar");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
+	    pool.appendClassPath(Bukkit.getWorldContainer().getAbsolutePath()+"/../plugins/MajnCorePlugin.jar");
 	    CtClass log = pool.get("java.util.logging.Logger");
 	    CtClass handler = pool.get("cz.majncraft.plugins.logCleaner.LogHandler");
 	    CtField f = new CtField(handler, "hiddenValue", log);
@@ -73,17 +75,11 @@ public class LogCleaner extends MajnPlugin {
 		log.toClass();
 		} catch (CannotCompileException e) {
 			logger.info(e.getMessage());
+			e.printStackTrace();
 		} catch (NotFoundException e) {
 			logger.info(e.getMessage());
+			e.printStackTrace();
 		}
-		Runnable task=new Runnable() {
-			
-			@Override
-			public void run() {
-					
-			}
-		};
-		worker.schedule(task, getConfig().getInt("Start-after"), TimeUnit.SECONDS);
 	}
 	public File getCustomLogFolder()
 	{
