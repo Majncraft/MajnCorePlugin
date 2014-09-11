@@ -66,17 +66,13 @@ public class LogCleaner extends MajnPlugin {
 	    pool.insertClassPath(s+"plugins/MajnCorePlugin.jar");
 	    CtClass log = pool.get("java.util.logging.Logger");
 	    	
-	    CtClass handler = pool.get(LogHandler.class.getName());
+	    CtClass handler = pool.get(LogFilters.class.getName());
 	    CtField f = new CtField(handler, "hiddenValue", log);
 	    f.setModifiers(Modifier.PUBLIC);
 	    log.addField(f);
-	    CtMethod method = log.getDeclaredMethod("addHandler");
-	    method.insertBefore("$1=hiddenValue.addHandler($1,getName());");
 	    
-	    CtMethod method2 = log.getDeclaredMethod("removeHandler");
-	    method2.insertBefore("return;");
-	    method2.insertBefore("if($1==null)");
-	    method2.insertBefore("$1=hiddenValue.removeHandler($1,getName());");
+	    CtMethod method2 = log.getDeclaredMethod("doLog");
+	    method2.insertBefore("$1=hiddenValue.testLog($1); if($1==null) return;");
 		logger.info("Inserting complate. Saving.");
 		log.toClass();
 		} catch (CannotCompileException e) {
