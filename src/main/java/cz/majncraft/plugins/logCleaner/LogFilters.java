@@ -38,7 +38,7 @@ public class LogFilters {
 	public static void reload()
 	{
 		filters.clear();
-		File f=new File(LogCleaner.instance.getPluginFolder()+"filters/");
+		File f=new File(LogCleaner.instance.getPluginFolder()+"/filters/");
 		if(!f.exists())
 		{
 			f.mkdirs();
@@ -153,7 +153,7 @@ public class LogFilters {
 	
 	private static void createExampleFilter() throws IOException
 	{
-		File f=new File(LogCleaner.instance.getPluginFolder()+"filters/examplefilter.filter");
+		File f=new File(LogCleaner.instance.getPluginFolder()+"/filters/examplefilter.filter");
 		InputStream stream = LogCleaner.class.getClassLoader().getResourceAsStream("/cz/majncraft/plugins/logCleaner/example/ExampleFilter.txt");//note that each / is a directory down in the "jar tree" been the jar the root of the tree"
 	    if (stream == null) {
 	        //send your exception or warning

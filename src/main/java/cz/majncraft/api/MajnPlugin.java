@@ -39,7 +39,7 @@ public abstract class MajnPlugin {
 	{
 		if(conf!=null)
 			return conf;
-		File file=new File(getPluginFolder()+"config.yml");
+		File file=new File(getPluginFolder()+"/config.yml");
 		conf=new YamlConfigurationExtended();
 		if(!file.exists())
 			try {
