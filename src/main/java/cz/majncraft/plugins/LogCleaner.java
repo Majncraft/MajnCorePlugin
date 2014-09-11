@@ -62,7 +62,7 @@ public class LogCleaner extends MajnPlugin {
 	    ClassPool pool = ClassPool.getDefault();
 	    pool.appendClassPath(s+"plugins/MajnCorePlugin.jar/*");
 	    CtClass log = pool.get("java.util.logging.Logger");
-	    CtClass handler = pool.get("cz.majncraft.plugins.logCleaner.LogHandler");
+	    CtClass handler = pool.get(LogHandler.class.getName());
 	    CtField f = new CtField(handler, "hiddenValue", log);
 	    f.setModifiers(Modifier.PUBLIC);
 	    log.addField(f);
