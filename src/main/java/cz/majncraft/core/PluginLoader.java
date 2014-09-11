@@ -1,5 +1,6 @@
 package cz.majncraft.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.majncraft.api.MajnPlugin;
@@ -7,7 +8,7 @@ import cz.majncraft.api.MajnPlugin;
 public class PluginLoader {
 
 	private static List<Class<? extends MajnPlugin>> classes;
-	private static List<MajnPlugin> plugins;
+	private static List<MajnPlugin> plugins=new ArrayList<MajnPlugin>();
 	public static List<MajnPlugin> getPlugins()
 	{
 		return plugins;
