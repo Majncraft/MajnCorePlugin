@@ -22,11 +22,15 @@ public final class ClassFinder {
         final String scannedPath = scannedPackage.replace(DOT, SLASH);
         final Enumeration<URL> resources;
         try {
+        	MajnCorePlugin.instance.getLogger().info("Scanning: "+scannedPath);
             resources = classLoader.getResources(scannedPath);
         } catch (IOException e) {
+        	MajnCorePlugin.instance.getLogger().info(e.getLocalizedMessage());
             throw new IllegalArgumentException(String.format(BAD_PACKAGE_ERROR, scannedPath, scannedPackage), e);
         }
         final List<Class<? extends MajnPlugin>> classes = new LinkedList<Class<? extends MajnPlugin>>();
+        if(!resources.hasMoreElements())
+        	MajnCorePlugin.instance.getLogger().info("Nothing in plugins found.");
         while (resources.hasMoreElements()) {
             final File file = new File(resources.nextElement().getFile());
             classes.addAll(find(file, scannedPackage));
