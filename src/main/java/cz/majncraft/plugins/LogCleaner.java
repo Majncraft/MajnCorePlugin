@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Handler;
+import java.util.logging.LogHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -30,7 +31,6 @@ import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.api.MajnPlugin;
 import cz.majncraft.core.YamlConfigurationExtended;
 import cz.majncraft.plugins.logCleaner.LogFilters;
-import cz.majncraft.plugins.logCleaner.LogHandler;
 
 public class LogCleaner extends MajnPlugin {
 
@@ -56,7 +56,6 @@ public class LogCleaner extends MajnPlugin {
 		logger.info("Reflection of java.util.logging.Handler");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
-	    pool.importPackage("cz.majncraft.plugins.logCleaner");
 	    CtClass handler = pool.get("java.util.logging.Logger");
 	    CtMethod method = handler.getDeclaredMethod("addHandler");
 	    method.insertBefore("$1=LogHandler.addHandler($1,getName());");
