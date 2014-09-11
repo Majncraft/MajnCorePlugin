@@ -74,7 +74,11 @@ public class LogCleaner extends MajnPlugin {
 	    CtMethod method2 = log.getDeclaredMethod("doLog");
 	    method2.insertBefore("$1=hiddenValue.testLog($1); if($1==null) return;");
 		logger.info("Inserting complate. Saving.");
-		log.toClass();
+		try {
+			log.writeFile(".");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		} catch (CannotCompileException e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();
