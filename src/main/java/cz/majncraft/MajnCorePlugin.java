@@ -16,11 +16,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import cz.majncraft.alteration.Spawn;
 import cz.majncraft.api.CommandRegister;
+import cz.majncraft.api.MajnPlugin;
 import cz.majncraft.commands.ChunkCommands;
 import cz.majncraft.commands.CommandEvent;
 import cz.majncraft.commands.TextCommands;
 import cz.majncraft.commands.WorldCommands;
 import cz.majncraft.core.IOUttils;
+import cz.majncraft.core.PluginLoader;
 import cz.majncraft.protection.BookTrade;
 import cz.majncraft.protection.MinecraftBugAbusing;
 import cz.majncraft.protection.WitherExplosion;
@@ -36,10 +38,13 @@ public class MajnCorePlugin extends JavaPlugin{
 	public MajnCorePlugin()
 	{
 		instance=this;
+		PluginLoader.loadPlugins();
 	}
 	@Override
 	public void onEnable() {
 		witherex=new WitherExplosion();
+		for(MajnPlugin plugin:PluginLoader.getPlugins())
+			plugin.onEnable();
 		IOUttils.loadWitherProtection(witherex);
 		mcbugabuse=new MinecraftBugAbusing();
 		spawn=new Spawn();
@@ -52,6 +57,8 @@ public class MajnCorePlugin extends JavaPlugin{
 	@Override
 	public void onDisable() {
 		super.onDisable();
+		for(MajnPlugin plugin:PluginLoader.getPlugins())
+			plugin.onDisable();
 	}
 	@Override
 	public void onLoad() {
