@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
+import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.api.MajnPlugin;
 
 public final class ClassFinder {
@@ -46,7 +47,7 @@ public final class ClassFinder {
             final String className = resource.substring(beginIndex, endIndex);
             try {
             	Class c=Class.forName(className);
-            	if (c.isAssignableFrom(MajnPlugin.class))
+            	if (MajnPlugin.class.isAssignableFrom(c))
             		classes.add(c);
             } catch (ClassNotFoundException ignore) {
             }
