@@ -1,0 +1,27 @@
+#This is example filter
+#	- type: ExactFilter
+#		expression: .... [string]
+#		case-sensitive: true/false [boolean]
+#		logger: empty/LoggerName [string] {empty=all loggers}
+#		log-to-file: empty/name [string] {empty=no logging to file}
+#
+#	- type: LoggerFilter
+#		expression: LoggerName/PluginName [string]
+#		log-to-file: empty/name [string] {empty=no logging to file}
+#
+#	- type: LevelFilter
+#		expression: LevelName [string] {INFO,WARN,ERROR,...}
+#		logger: empty/LoggerName [string] {empty=all loggers}
+#		log-to-file: empty/name [string] {empty=no logging to file}
+#
+#	- type: RegexFilter
+#		expression: regex [string]
+#		log-to-file: empty/name [string] {empty=no logging to file}
+#		logger: empty/LoggerName [string] {empty=all loggers}
+#	
+#	- type: AlterateFilter
+#		expression: regex [string]
+#		replace: .... [string] { $0 - $999 for replacing by regex}
+#		log-to-file: empty/name [string] {empty=no logging to file}
+#		log-changed: true/false [boolean]
+#		logger: empty/LoggerName [string] {empty=all loggers}
