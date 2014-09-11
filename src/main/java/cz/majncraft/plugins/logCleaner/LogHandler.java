@@ -1,4 +1,4 @@
-package java.util.logging;
+package cz.majncraft.plugins.logCleaner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
-
-import cz.majncraft.plugins.logCleaner.LogFilters;
 
 public class LogHandler extends Handler {
 

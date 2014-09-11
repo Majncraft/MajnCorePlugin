@@ -11,7 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Handler;
-import java.util.logging.LogHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -20,6 +19,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
 import javassist.CtMethod;
+import javassist.Modifier;
 import javassist.NotFoundException;
 
 import javax.swing.text.Position;
@@ -31,6 +31,7 @@ import cz.majncraft.MajnCorePlugin;
 import cz.majncraft.api.MajnPlugin;
 import cz.majncraft.core.YamlConfigurationExtended;
 import cz.majncraft.plugins.logCleaner.LogFilters;
+import cz.majncraft.plugins.logCleaner.LogHandler;
 
 public class LogCleaner extends MajnPlugin {
 
@@ -56,16 +57,20 @@ public class LogCleaner extends MajnPlugin {
 		logger.info("Reflection of java.util.logging.Handler");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
-	    CtClass handler = pool.get("java.util.logging.Logger");
-	    CtMethod method = handler.getDeclaredMethod("addHandler");
-	    method.insertBefore("$1=LogHandler.addHandler($1,getName());");
+	    CtClass log = pool.get("java.util.logging.Logger");
+	    CtClass handler = pool.get("cz.majncraft.plugins.logCleaner.LogHandler");
+	    CtField f = new CtField(handler, "hiddenValue", log);
+	    f.setModifiers(Modifier.PUBLIC);
+	    log.addField(f);
+	    CtMethod method = log.getDeclaredMethod("addHandler");
+	    method.insertBefore("$1=hiddenValue.addHandler($1,getName());");
 	    
-	    CtMethod method2 = handler.getDeclaredMethod("removeHandler");
+	    CtMethod method2 = log.getDeclaredMethod("removeHandler");
 	    method2.insertBefore("return;");
 	    method2.insertBefore("if($1==null)");
-	    method2.insertBefore("$1=LogHandler.removeHandler($1,getName());");
+	    method2.insertBefore("$1=hiddenValue.removeHandler($1,getName());");
 		logger.info("Inserting complate. Saving.");
-	    handler.toClass();
+		log.toClass();
 		} catch (CannotCompileException e) {
 			logger.info(e.getMessage());
 		} catch (NotFoundException e) {
