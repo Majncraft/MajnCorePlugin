@@ -55,10 +55,12 @@ public class LogCleaner extends MajnPlugin {
 	public void onEnable() {
 		LogFilters.reload();
 		logger.info("Reflection of java.util.logging.Handler");
-		logger.info(Bukkit.getWorldContainer().getAbsolutePath()+"/../plugins/MajnCorePlugin.jar");
+		String s=Bukkit.getWorldContainer().getAbsolutePath();
+		s=s.substring(0,s.length()-1);
+		logger.info(s+"plugins/MajnCorePlugin.jar");
 	    try {
 	    ClassPool pool = ClassPool.getDefault();
-	    pool.appendClassPath(Bukkit.getWorldContainer().getAbsolutePath()+"/../plugins/MajnCorePlugin.jar");
+	    pool.appendClassPath(s+"plugins/MajnCorePlugin.jar/*");
 	    CtClass log = pool.get("java.util.logging.Logger");
 	    CtClass handler = pool.get("cz.majncraft.plugins.logCleaner.LogHandler");
 	    CtField f = new CtField(handler, "hiddenValue", log);
