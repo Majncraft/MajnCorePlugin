@@ -1,6 +1,7 @@
 package cz.majncraft.plugins;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -88,6 +89,11 @@ public class LogCleaner extends MajnPlugin {
 		yaml.s("Log-time", true);
 		yaml.s("Archive-after-start", true);
 		yaml.s("Start-after",60);
+		try {
+			yaml.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -37,6 +37,7 @@ public final class ClassFinder {
     private final static List<Class<? extends MajnPlugin>> find(final File file, final String scannedPackage) {
         final List<Class<? extends MajnPlugin>> classes = new LinkedList<Class<? extends MajnPlugin>>();
         final String resource = scannedPackage + DOT + file.getName();
+    	MajnCorePlugin.instance.getLogger().info("Found package:"+resource);
         if (file.isDirectory()) {
             for (File nestedFile : file.listFiles()) {
                 classes.addAll(find(nestedFile, scannedPackage));
@@ -46,6 +47,7 @@ public final class ClassFinder {
             final int endIndex = resource.length() - CLASS_SUFFIX.length();
             final String className = resource.substring(beginIndex, endIndex);
             try {
+            	MajnCorePlugin.instance.getLogger().info("Found class:"+className);
             	Class c=Class.forName(className);
             	if (MajnPlugin.class.isAssignableFrom(c))
             		classes.add(c);
