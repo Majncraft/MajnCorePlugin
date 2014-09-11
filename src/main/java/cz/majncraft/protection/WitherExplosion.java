@@ -3,15 +3,22 @@ package cz.majncraft.protection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.Event;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.EventExecutor;
 
 public class WitherExplosion implements Listener {
 	  
