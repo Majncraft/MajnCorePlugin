@@ -14,6 +14,13 @@ import java.util.logging.Handler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtField;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+
 import javax.swing.text.Position;
 
 import org.bukkit.Bukkit;
@@ -46,37 +53,25 @@ public class LogCleaner extends MajnPlugin {
 	@Override
 	public void onEnable() {
 		LogFilters.reload();
+		logger.info("Reflection of java.util.logging.Handler");
+	    try {
+	    ClassPool pool = ClassPool.getDefault();
+	    CtClass handler = pool.get("java.util.logging.Handler");
+	    CtMethod method = handler.getDeclaredMethod("publish");
+	    method.insertBefore("return;");
+	    method.insertBefore("if(record==null)");
+	    method.insertBefore("record=cz.majncraft.plugins.logCleaner.LogFilters.testLog(record);");
+		logger.info("Inserting complate. Saving.");
+	    handler.toClass();
+		} catch (CannotCompileException e) {
+			logger.info(e.getMessage());
+		} catch (NotFoundException e) {
+			logger.info(e.getMessage());
+		}
 		Runnable task=new Runnable() {
 			
 			@Override
 			public void run() {
-				Set<String> possibleLoggers=new HashSet<>();
-				Set<Logger> loggers=new HashSet<>();
-				loggers.add(Logger.getGlobal());
-				Enumeration<String> s=LogManager.getLogManager().getLoggerNames();
-				while(s.hasMoreElements())
-				{
-					possibleLoggers.add(s.nextElement());
-				}
-				for(Plugin plugin:Bukkit.getPluginManager().getPlugins())
-				{
-					possibleLoggers.add(plugin.getName());
-					if(plugin.getLogger()!=null)
-						loggers.add(plugin.getLogger());
-				}
-				for(String possibleLogger:possibleLoggers)
-				{
-					loggers.add(Logger.getLogger(possibleLogger));
-				}
-				for(Logger log:loggers)
-				{
-					Handler[] handlers=log.getHandlers();
-					for(Handler h:handlers)
-						log.removeHandler(h);
-					LogHandler handler=new LogHandler(handlers);
-					log.addHandler(handler);
-				}
-				logger.info("LogCleaner now handle controls over "+loggers.size()+" loggers:");
 					
 			}
 		};
@@ -91,6 +86,7 @@ public class LogCleaner extends MajnPlugin {
 		yaml.s("Log-folder", "logs/CustomLogging/");
 		yaml.s("Log-time", true);
 		yaml.s("Archive-after-start", true);
+		yaml.s("Debug", true);
 		yaml.s("Start-after",60);
 		try {
 			yaml.save();

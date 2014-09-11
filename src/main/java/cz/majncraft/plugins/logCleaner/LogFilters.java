@@ -27,6 +27,7 @@ public class LogFilters {
 	
 	public static LogRecord testLog(LogRecord record)
 	{
+		LogCleaner.getLogger().info("Testlog reached");
 		for(LogFilter filter:filters)
 		{
 			record=filter.match(record);
