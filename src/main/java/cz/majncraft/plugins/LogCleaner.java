@@ -74,6 +74,7 @@ public class LogCleaner extends MajnPlugin {
 				}
 				for(Logger log:loggers)
 				{
+					try{
 					log.setFilter(new Filter() {
 						
 						@Override
@@ -82,6 +83,20 @@ public class LogCleaner extends MajnPlugin {
 							return !arg0.getMessage().equals("");
 						}
 					});
+					for(Handler h:log.getHandlers())
+						h.setFilter(new Filter() {
+							
+							@Override
+							public boolean isLoggable(LogRecord record) {
+								LogFilters.testLog(record);
+								return !record.getMessage().equals("");
+							}
+						});
+					}
+					catch(SecurityException e)
+					{
+						e.printStackTrace();
+					}
 				}
 				logger.info("LogCleaner now handle controls over "+loggers.size()+" loggers.");
 			}
