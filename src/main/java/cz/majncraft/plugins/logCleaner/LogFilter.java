@@ -45,7 +45,7 @@ public abstract class LogFilter {
 					isValidLogger(record.getLoggerName()))
 			{
 				LoggingBuffer.log(logfile,record);
-				return null;
+				record.setMessage("");
 			}
 			return record;
 		}
@@ -64,7 +64,7 @@ public abstract class LogFilter {
 			if(record.getLoggerName().contains(expression))
 			{
 				LoggingBuffer.log(logfile,record);
-				return null;
+				record.setMessage("");
 			}
 			return record;
 		}
@@ -84,7 +84,7 @@ public abstract class LogFilter {
 			if(isValidLogger(record.getLoggerName()) && level==record.getLevel())
 			{
 				LoggingBuffer.log(logfile,record);
-				return null;
+				record.setMessage("");
 			}
 			return record;
 		}
@@ -104,7 +104,7 @@ public abstract class LogFilter {
 			if(isValidLogger(record.getLoggerName()) && match.find())
 			{
 				LoggingBuffer.log(logfile,record);
-				return null;
+				record.setMessage("");
 			}
 			return record;
 		}

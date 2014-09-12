@@ -30,9 +30,9 @@ public class LogFilters {
 		LogCleaner.getLogger().info("Testlog reached");
 		for(LogFilter filter:filters)
 		{
-			record=filter.match(record);
-			if(record==null)
-				return null;
+			filter.match(record);
+			if(record.getMessage().equals(""))
+				break;
 		}
 		return record;
 	}

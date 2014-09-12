@@ -12,18 +12,11 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Filter;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.Modifier;
-import javassist.NotFoundException;
 
 import javax.swing.text.Position;
 
@@ -57,35 +50,43 @@ public class LogCleaner extends MajnPlugin {
 	@Override
 	public void onEnable() {
 		LogFilters.reload();
-		logger.info("Reflection of java.util.logging.Handler");
-		String s=Bukkit.getWorldContainer().getAbsolutePath();
-		s=s.substring(0,s.length()-1);
-		logger.info(s+"plugins/MajnCorePlugin.jar");
-	    try {
-	    ClassPool pool = ClassPool.getDefault();
-	    pool.insertClassPath(s+"plugins/MajnCorePlugin.jar");
-	    CtClass log = pool.get("java.util.logging.Logger");
-	    	
-	    CtClass handler = pool.get(LogFilters.class.getName());
-	    CtField f = new CtField(handler, "hiddenValue", log);
-	    f.setModifiers(Modifier.PUBLIC);
-	    log.addField(f);
-	    
-	    CtMethod method2 = log.getDeclaredMethod("doLog");
-	    method2.insertBefore("$1=hiddenValue.testLog($1); if($1==null) return;");
-		logger.info("Inserting complate. Saving.");
-		try {
-			log.writeFile(".");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		} catch (CannotCompileException e) {
-			logger.info(e.getMessage());
-			e.printStackTrace();
-		} catch (NotFoundException e) {
-			logger.info(e.getMessage());
-			e.printStackTrace();
-		}
+
+		Runnable task=new Runnable() {
+			@Override
+			public void run() {
+				Set<String> possibleLoggers=new HashSet<>();
+				Set<Logger> loggers=new HashSet<>();
+				loggers.add(Logger.getGlobal());
+				Enumeration<String> s=LogManager.getLogManager().getLoggerNames();
+				while(s.hasMoreElements())
+				{
+					possibleLoggers.add(s.nextElement());
+				}
+				for(Plugin plugin:Bukkit.getPluginManager().getPlugins())
+				{
+					possibleLoggers.add(plugin.getName());
+					if(plugin.getLogger()!=null)
+						loggers.add(plugin.getLogger());
+				}
+				for(String possibleLogger:possibleLoggers)
+				{
+					loggers.add(Logger.getLogger(possibleLogger));
+				}
+				for(Logger log:loggers)
+				{
+					log.setFilter(new Filter() {
+						
+						@Override
+						public boolean isLoggable(LogRecord arg0) {
+							LogFilters.testLog(arg0);
+							return !arg0.getMessage().equals("");
+						}
+					});
+				}
+				logger.info("LogCleaner now handle controls over "+loggers.size()+" loggers.");
+			}
+		};
+		worker.schedule(task, getConfig().getInt("Start-after"), TimeUnit.SECONDS);
 	}
 	public File getCustomLogFolder()
 	{
